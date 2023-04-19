@@ -12,7 +12,9 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\Querys\" />
+    <Folder Include="Interfaces\Services\" />
     <Folder Include="Response\" />
+    <Folder Include="UseCase\" />
   </ItemGroup>
 
 </Project>

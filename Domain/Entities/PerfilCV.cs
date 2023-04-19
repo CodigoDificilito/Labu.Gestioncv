@@ -13,5 +13,10 @@ namespace Domain.Entities
         public string Descripcion { get; set; }
         public int SalarioMinimo { get; set; }
         public string Imagen { get; set; }
+
+        public Adjunto Adjunto { get; set; }
+        public IList<Estudios> Estudios { get; set; }
+        public IList<Experiencia> Experiencia { get; set; }
+        public IList<Habilidad> Habilidad { get; set; }
     }
 }

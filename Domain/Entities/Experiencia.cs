@@ -14,5 +14,6 @@ namespace Domain.Entities
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
 
+        public PerfilCV PerfilCV { get; set; }
     }
 }

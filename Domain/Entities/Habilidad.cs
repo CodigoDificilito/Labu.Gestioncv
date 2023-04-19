@@ -12,5 +12,6 @@ namespace Domain.Entities
         public int PerfilCVId { get; set; }
         public string Descripcion { get; set; }
 
+        public PerfilCV PerfilCV { get; set; }
     }
 }

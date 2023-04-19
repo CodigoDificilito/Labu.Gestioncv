@@ -10,5 +10,7 @@ namespace Domain.Entities
     {
         public int TipoEstudioId { get; set; }
         public string Nombre { get; set; }
+
+        public Estudios Estudios { get; set; }
     }
 }
