@@ -8,5 +8,11 @@ namespace Domain.Entities
 {
     public class Experiencia
     {
+        public int ExperienciaId { get; set; }
+        public int PerfilCVId { get; set; }
+        public string Descripcion { get; set; }
+        public DateTime FechaInicio { get; set; }
+        public DateTime FechaFin { get; set; }
+
     }
 }

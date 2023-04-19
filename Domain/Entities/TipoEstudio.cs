@@ -8,6 +8,7 @@ namespace Domain.Entities
 {
     public class TipoEstudio
     {
-
+        public int TipoEstudioId { get; set; }
+        public string Nombre { get; set; }
     }
 }

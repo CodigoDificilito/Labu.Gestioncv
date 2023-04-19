@@ -8,5 +8,9 @@ namespace Domain.Entities
 {
     public class Habilidad
     {
+        public int HabilidadId { get; set; }
+        public int PerfilCVId { get; set; }
+        public string Descripcion { get; set; }
+
     }
 }
