@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Command\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Query\" />
   </ItemGroup>
 

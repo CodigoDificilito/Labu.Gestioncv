@@ -7,14 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\Querys\**" />
+    <Compile Remove="Interfaces\Services\**" />
+    <EmbeddedResource Remove="Interfaces\Querys\**" />
+    <EmbeddedResource Remove="Interfaces\Services\**" />
+    <None Remove="Interfaces\Querys\**" />
+    <None Remove="Interfaces\Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\Querys\" />
-    <Folder Include="Interfaces\Services\" />
+    <Folder Include="Interfaces\IPerfilCV\" />
+    <Folder Include="Interfaces\IExperiencia\" />
+    <Folder Include="Interfaces\IEstudios\" />
+    <Folder Include="Interfaces\IHabilidad\" />
+    <Folder Include="Interfaces\ITipoEstudio\" />
+    <Folder Include="Interfaces\IAdjunto\" />
     <Folder Include="Response\" />
-    <Folder Include="UseCase\" />
+    <Folder Include="UseCase\Services\STipoEstudio\" />
+    <Folder Include="UseCase\Services\SPerfilCV\" />
+    <Folder Include="UseCase\Services\SExperiencia\" />
+    <Folder Include="UseCase\Services\SHabilidad\" />
+    <Folder Include="UseCase\Services\SEstudios\" />
+    <Folder Include="UseCase\Services\SAdjunto\" />
   </ItemGroup>
 
 </Project>

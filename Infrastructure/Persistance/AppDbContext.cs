@@ -1,10 +1,5 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Persistance
 {
@@ -37,10 +32,6 @@ namespace Infrastructure.Persistance
                 entity.Property(sm => sm.SalarioMinimo);
                 entity.Property(i => i.Imagen);
 
-                entity.HasOne<Adjunto>(a=>a.Adjunto)
-                      .WithOne(pcv=>pcv.PerfilCV)
-                      .HasForeignKey<PerfilCV>(pcv=>pcv.PerfilCVId);
-
                 entity.HasMany<Estudios>(e => e.Estudios)
                       .WithOne(pcv=>pcv.PerfilCV)
                       .HasForeignKey(pcv=>pcv.PerfilCVId)
@@ -57,92 +48,6 @@ namespace Infrastructure.Persistance
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<Estudios>(entity =>
-            {
-                entity.ToTable("Estudios");
-                entity.HasKey(ei => ei.EstudioId);
-                entity.Property(ei => ei.EstudioId)
-                      .ValueGeneratedOnAdd()
-                      .IsRequired();
-                entity.Property(ai => ai.PerfilCVId)
-                      .IsRequired();
-                entity.Property(tei => tei.TipoEstudioId)
-                      .IsRequired();
-                entity.Property(d => d.Descripcion)
-                      .IsRequired()
-                      .HasMaxLength(50);
-                entity.Property(fi => fi.FechaInicio)
-                      .IsRequired();
-                entity.Property(ff => ff.FechaFin)
-                      .IsRequired();
-
-                entity.HasOne<TipoEstudio>(te => te.TipoEstudio)
-                      .WithOne(pcv => pcv.Estudios)
-                      .HasForeignKey<TipoEstudio>(tei => tei.TipoEstudioId);
-
-                entity.HasOne<PerfilCV>(pcv=>pcv.PerfilCV)
-                      .WithMany(e=>e.Estudios)
-                      .HasForeignKey(pcvi=>pcvi.PerfilCVId);
-            });
-
-            modelBuilder.Entity<TipoEstudio>(entity =>
-            {
-                entity.ToTable("TipoEstudio");
-                entity.HasKey(tei => tei.TipoEstudioId);
-                entity.Property(tei => tei.TipoEstudioId)
-                      .ValueGeneratedOnAdd()
-                      .IsRequired();
-                entity.Property(n => n.Nombre)
-                     .IsRequired()
-                     .HasMaxLength(500);
-
-                entity.HasOne<Estudios>(e => e.Estudios)
-                      .WithOne(te => te.TipoEstudio)
-                      .HasForeignKey<TipoEstudio>(tei => tei.TipoEstudioId);
-
-                entity.HasData(
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 1,
-                            Nombre = "Primaria"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 2,
-                            Nombre = "Secundaria"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 3,
-                            Nombre = "Terciario"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 4,
-                            Nombre = "Universitario"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 5,
-                            Nombre = "Posgrado"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 6,
-                            Nombre = "Master"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 7,
-                            Nombre = "Doctorado"
-                        },
-                        new TipoEstudio
-                        {
-                            TipoEstudioId = 8,
-                            Nombre = "Curso"
-                        }
-                    );
-            });
 
             modelBuilder.Entity<Habilidad>(entity =>
             {
@@ -200,7 +105,90 @@ namespace Infrastructure.Persistance
 
                 entity.HasOne<PerfilCV>(pcv => pcv.PerfilCV)
                       .WithOne(a => a.Adjunto)
-                      .HasForeignKey<PerfilCV>(pcv => pcv.PerfilCVId);
+                      .HasForeignKey<Adjunto>(pcv => pcv.PerfilCVId);
+            });
+
+            modelBuilder.Entity<TipoEstudio>(entity =>
+            {
+                entity.ToTable("TipoEstudio");
+                entity.HasKey(tei => tei.TipoEstudioId);
+                entity.Property(tei => tei.TipoEstudioId)
+                      .ValueGeneratedOnAdd()
+                      .IsRequired();
+                entity.Property(n => n.Nombre)
+                     .IsRequired()
+                     .HasMaxLength(500);
+
+                entity.HasData(
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 1,
+                            Nombre = "Primaria"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 2,
+                            Nombre = "Secundaria"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 3,
+                            Nombre = "Terciario"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 4,
+                            Nombre = "Universitario"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 5,
+                            Nombre = "Posgrado"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 6,
+                            Nombre = "Master"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 7,
+                            Nombre = "Doctorado"
+                        },
+                        new TipoEstudio
+                        {
+                            TipoEstudioId = 8,
+                            Nombre = "Curso"
+                        }
+                    );
+            });
+
+            modelBuilder.Entity<Estudios>(entity =>
+            {
+                entity.ToTable("Estudios");
+                entity.HasKey(ei => ei.EstudioId);
+                entity.Property(ei => ei.EstudioId)
+                      .ValueGeneratedOnAdd()
+                      .IsRequired();
+                entity.Property(ai => ai.PerfilCVId)
+                      .IsRequired();
+                entity.Property(tei => tei.TipoEstudioId)
+                      .IsRequired();
+                entity.Property(d => d.Descripcion)
+                      .IsRequired()
+                      .HasMaxLength(50);
+                entity.Property(fi => fi.FechaInicio)
+                      .IsRequired();
+                entity.Property(ff => ff.FechaFin)
+                      .IsRequired();
+
+                entity.HasOne<TipoEstudio>(te => te.TipoEstudio)
+                      .WithOne(pcv => pcv.Estudios)
+                      .HasForeignKey<Estudios>(tei => tei.TipoEstudioId);
+
+                entity.HasOne<PerfilCV>(pcv => pcv.PerfilCV)
+                      .WithMany(e => e.Estudios)
+                      .HasForeignKey(pcvi => pcvi.PerfilCVId);
             });
         }
     }
